@@ -24,7 +24,6 @@ public class JobController {
     @PostMapping("/post")
     public ResponseEntity<Job> postingJob(@RequestBody Job job){
         try {
-            System.out.println(job.toString());
             return ResponseEntity.status(201).body(jobService.save(job));
         } catch (Exception e) {
             System.out.println(e.getMessage());

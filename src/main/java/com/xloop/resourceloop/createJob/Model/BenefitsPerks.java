@@ -24,10 +24,9 @@ public class BenefitsPerks {
     @Column(nullable = false)
     @Getter @Setter private String benefitPerks;
 
-    @Column(nullable = false)
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "job_id")
+    @JoinColumn(name = "job_id", nullable = false)
     @Getter @Setter private Job job;
 
     public BenefitsPerks(String benefitPerks) {

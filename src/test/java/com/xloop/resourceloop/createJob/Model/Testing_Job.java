@@ -3,10 +3,8 @@ package com.xloop.resourceloop.createJob.Model;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Department_Enum;
 import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Employement_Enum;
 import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Gender_Enum;
-import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Location_Enum;
 import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Traveling_Enum;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -43,20 +41,20 @@ class Testing_Job {
 
     @Test
     public void testDepartment() {
-        job.setDepartment(Department_Enum.ClOUD_ENGINEER);
-        assertEquals(Department_Enum.ClOUD_ENGINEER, job.getDepartment());
+        job.setDepartment("ClOUD_ENGINEER");
+        assertEquals("ClOUD_ENGINEER", job.getDepartment());
     }
 
     @Test
     public void testEmploymentCategory() {
-        job.setEmployementCategory(Employement_Enum.FULL_TIME);
-        assertEquals(Employement_Enum.FULL_TIME, job.getEmployementCategory());
+        job.setEmployementCategory(List.of(Employement_Enum.FULL_TIME));
+        assertEquals(List.of(Employement_Enum.FULL_TIME), job.getEmployementCategory());
     }
 
     @Test
     public void testGender() {
-        job.setGender(Gender_Enum.MALE);
-        assertEquals(Gender_Enum.MALE, job.getGender());
+        job.setGender(List.of(Gender_Enum.MALE));
+        assertEquals(List.of(Gender_Enum.MALE), job.getGender());
     }
 
     @Test
@@ -67,13 +65,20 @@ class Testing_Job {
 
     @Test
     public void testLocation() {
-        job.setLocation(Location_Enum.KARACHI);
-        assertEquals(Location_Enum.KARACHI, job.getLocation());
+        job.setLocation("KARACHI");
+        assertEquals("KARACHI", job.getLocation());
     }
+
     @Test
-    public void testSkills() {
-        job.setSkills("Java, JUnit, Spring");
-        assertEquals("Java, JUnit, Spring", job.getSkills());
+    public void testSoftSkills() {
+        job.setSoftSkills(List.of(new  SoftSkill("Communication") ));
+        assertEquals("Communication", job.getSoftSkills().get(0).getSoftSkill());
+    }
+
+    @Test
+    public void testTechnicalSkills() {
+        job.setTechnicalSkills(List.of(new  technicalSkill("Java") ));
+        assertEquals("Java", job.getTechnicalSkills().get(0).getTechnicalSkill());
     }
 
     @Test
@@ -99,9 +104,9 @@ class Testing_Job {
         assertEquals("Develop and maintain software applications", job.getResponsibilitiess().get(0).getResponsibility());
     }
     @Test
-    public void testDesignation() {
-        job.setDesignations(List.of(new Designation("Software Engineer")));
-        assertEquals("Software Engineer", job.getDesignations().get(0).getDesignation());
+    public void testTitle() {
+        job.setTitle("Backend Engineer");
+        assertEquals("Backend Engineer", job.getTitle());
     }
     @Test
     public void testEducation() {

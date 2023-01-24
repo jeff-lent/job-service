@@ -13,14 +13,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xloop.resourceloop.createJob.Model.BenefitsPerks;
-import com.xloop.resourceloop.createJob.Model.Designation;
 import com.xloop.resourceloop.createJob.Model.Education;
 import com.xloop.resourceloop.createJob.Model.Job;
 import com.xloop.resourceloop.createJob.Model.Responsibilities;
-import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Department_Enum;
+import com.xloop.resourceloop.createJob.Model.SoftSkill;
+import com.xloop.resourceloop.createJob.Model.technicalSkill;
 import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Employement_Enum;
 import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Gender_Enum;
-import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Location_Enum;
 import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Traveling_Enum;
 import com.xloop.resourceloop.createJob.Service.JobService;
 
@@ -63,19 +62,20 @@ public class Test_Job_Controller {
 
         Job job = new Job();
         job.setId(1L);
-        job.setDepartment(Department_Enum.ClOUD_ENGINEER);
-        job.setEmployementCategory(Employement_Enum.FULL_TIME);
-        job.setGender(Gender_Enum.MALE);
+        job.setTitle("Backend Engineer");
+        job.setDepartment("ClOUD_ENGINEER");
+        job.setEmployementCategory(List.of(Employement_Enum.FULL_TIME) );
+        job.setGender(List.of(Gender_Enum.MALE) );
         job.setTraveling(Traveling_Enum.NO);
-        job.setLocation(Location_Enum.KARACHI);
-        job.setSkills("Java, JUnit, Spring");
+        job.setLocation("KARACHI");
+        job.setSoftSkills(List.of(new SoftSkill("Communication")));
+        job.setTechnicalSkills(List.of(new technicalSkill("Java"), new technicalSkill("Junit")));
         job.setPostDate(pd);
         job.setCloseDate(dd);
         job.setDescription("Software Engineer Position");
         job.setResponsibilitiess(List.of(new Responsibilities("Develop and maintain software applications")));
         job.setExperienceLevel(3);
         job.setVacancyCount(5);
-        job.setDesignations(List.of(new Designation("Software Engineer")));
         job.setEducations(List.of(new Education("Bachelors in Computer Science")));
         job.setBenefitPerkss(List.of(new BenefitsPerks("Health Insurance, Paid Vacation")));
         
@@ -90,19 +90,20 @@ public class Test_Job_Controller {
             .content(json))
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.id").value(1L))
+            .andExpect(jsonPath("$.title").value("Backend Engineer"))
             .andExpect(jsonPath("$.department").value("ClOUD_ENGINEER"))
             .andExpect(jsonPath("$.employementCategory").value("FULL_TIME"))
             .andExpect(jsonPath("$.gender").value("MALE"))
             .andExpect(jsonPath("$.traveling").value("NO"))
             .andExpect(jsonPath("$.location").value("KARACHI"))
-            .andExpect(jsonPath("$.skills").value("Java, JUnit, Spring"))
+            .andExpect(jsonPath("$.softSkills[0].softSkill").value("Communication"))
+            .andExpect(jsonPath("$.technicalSkills[0].technicalSkill").value("Java"))
             .andExpect(jsonPath("$.postDate").value(pd.getTime()))
             .andExpect(jsonPath("$.closeDate").value(dd.getTime()))
             .andExpect(jsonPath("$.description").value("Software Engineer Position"))
             .andExpect(jsonPath("$.experienceLevel").value(3))
             .andExpect(jsonPath("$.vacancyCount").value(5))
             .andExpect(jsonPath("$.responsibilitiess[0].responsibility").value("Develop and maintain software applications"))
-            .andExpect(jsonPath("$.designations[0].designation").value("Software Engineer"))
             .andExpect(jsonPath("$.educations[0].education").value("Bachelors in Computer Science"))
             .andExpect(jsonPath("$.benefitPerkss[0].benefitPerks").value("Health Insurance, Paid Vacation"));
     }

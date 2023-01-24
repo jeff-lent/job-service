@@ -14,26 +14,25 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Getter @Setter
-public class Designation {
+public class technicalSkill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    @Getter @Setter private String designation;
-    
+    @Getter @Setter private String technicalSkill;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "job_id", nullable = false)
+    @JoinColumn(name = "job_id")
     @Getter @Setter private Job job;
-    
-    public Designation(String designation) {
-        this.designation = designation;
+
+
+    public technicalSkill(String technicalSkill){
+        this.technicalSkill = technicalSkill;
     }
 
-    public Designation() {
-    }
 
+    public technicalSkill() {}
 }

@@ -3,10 +3,8 @@ package com.xloop.resourceloop.createJob.Model;
 import java.util.Date;
 import java.util.List;
 
-import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Department_Enum;
 import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Employement_Enum;
 import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Gender_Enum;
-import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Location_Enum;
 import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Traveling_Enum;
 
 import jakarta.persistence.CascadeType;
@@ -23,66 +21,101 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+Job title ( text field)
+
+Description (text)
+
+Department (drop-down with add button)
+
+Responsibilities (text field with add button)
+
+Education/degree (text field)
+
+Experience level (drop-down list) (0-25)
+
+Employment Category  (intern, full-time, contract, part-time - dropdown could be more than one)
+
+No. of vacancies (text field)
+
+Gender (male, female, others) (checkbox)
+
+Skills (soft skills & technical skills) (drop down with add button)
+
+Job Location (cities dropdown) 
+
+Requires traveling (yes/no/maybe) (dropdown)
+
+Benefits and perks (text field)
+
+closing date (calendar) (15 years range)
+ */
+
+
 
 @Entity
 @Getter @Setter
 @ToString
 public class Job {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column( nullable = false)
+    private String title; 
+    
+    @Column( nullable = false)
+    private String description;
+    
+    @Column( nullable = false)
+    private String department;
+    
+    @OneToMany(mappedBy = "job", fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
+    private List<Responsibilities> responsibilitiess;
+    
+    @OneToMany(mappedBy = "job", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    private List<Education> educations;
+    
+    @Column(precision = 2, nullable = false)
+    private int experienceLevel;
+    
+    @Enumerated(EnumType.STRING)
+    @Column( nullable = false)
+    private List<Employement_Enum> employementCategory; // LIST OF EMOLYEMENT TYPE WOULD SELECTED
+    
+    @Column( nullable = false)
+    private int vacancyCount;
+    
+    @Enumerated(EnumType.STRING)
+    @Column( nullable = false)
+    private List<Gender_Enum> gender; // ADDED BOTH, MALE FEMALE
 
-    @Enumerated(EnumType.STRING)
-    @Column( nullable = false)
-    private Department_Enum department;
+
+    @OneToMany(mappedBy = "job", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    private List<SoftSkill> softSkills; 
     
-    @Enumerated(EnumType.STRING)
+
+    @OneToMany(mappedBy = "job", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    private List<technicalSkill> technicalSkills; 
+
     @Column( nullable = false)
-    private Employement_Enum employementCategory;
-    
-    @Enumerated(EnumType.STRING)
-    @Column( nullable = false)
-    private Gender_Enum gender;
+    private String location;
     
     @Enumerated(EnumType.STRING)
     @Column( nullable = false)
     private Traveling_Enum traveling;
     
-    @Column( nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Location_Enum location;
-    
-    @Column( nullable = false)
-    private String skills;
     
     @Column( nullable = false)
     private Date   postDate;
+    
+    @OneToMany(mappedBy = "job",  fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    private List<BenefitsPerks> benefitPerkss;
 
     @Column( nullable = false)
     private Date   closeDate;
-
-    @Column( nullable = false)
-    private String description;
     
-
-    @OneToMany(mappedBy = "job", fetch = FetchType.LAZY ,cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Responsibilities> responsibilitiess;
-    
-    @OneToMany(mappedBy = "job", fetch = FetchType.LAZY , cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Designation> designations;
-    
-    @OneToMany(mappedBy = "job", fetch = FetchType.LAZY , cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Education> educations;
-    
-    @OneToMany(mappedBy = "job",  fetch = FetchType.LAZY , cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BenefitsPerks> benefitPerkss;
-
-    @Column(precision = 3, nullable = false)
-    private int experienceLevel;
-    
-    @Column( nullable = false)
-    private int vacancyCount;
     
     // public void addResponsibilities(Responsibilities responsibilities){
 

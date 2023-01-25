@@ -38,7 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Disabled // For test the Job Controller remove the "@CrossOrigin(origins = "${app.cors.origin}")" line from job Controller class.
+// @Disabled // For test the Job Controller remove the "@CrossOrigin(origins = "${app.cors.origin}")" line from job Controller class.
 public class Test_Job_Controller {
     
     private MockMvc mockMvc;
@@ -60,12 +60,13 @@ public class Test_Job_Controller {
         Date pd = Date.from( LocalDate.of(2022, 1, 15).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant() ) ;
         Date dd = Date.from( LocalDate.of(2022, 1, 25).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant() ) ;
 
+        
         Job job = new Job();
         job.setId(1L);
         job.setTitle("Backend Engineer");
         job.setDepartment("ClOUD_ENGINEER");
         job.setEmployementCategory(List.of(Employement_Enum.FULL_TIME) );
-        job.setGender(List.of(Gender_Enum.MALE) );
+        job.setGender(Gender_Enum.MALE );
         job.setTraveling(Traveling_Enum.NO);
         job.setLocation("KARACHI");
         job.setSoftSkills(List.of(new SoftSkill("Communication")));

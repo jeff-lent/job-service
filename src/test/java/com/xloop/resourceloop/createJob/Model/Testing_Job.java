@@ -53,8 +53,8 @@ class Testing_Job {
 
     @Test
     public void testGender() {
-        job.setGender(List.of(Gender_Enum.MALE));
-        assertEquals(List.of(Gender_Enum.MALE), job.getGender());
+        job.setGender(Gender_Enum.MALE);
+        assertEquals(Gender_Enum.MALE, job.getGender());
     }
 
     @Test

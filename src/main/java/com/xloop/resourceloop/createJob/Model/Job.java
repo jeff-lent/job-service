@@ -89,7 +89,7 @@ public class Job {
     
     @Enumerated(EnumType.STRING)
     @Column( nullable = false)
-    private List<Gender_Enum> gender; // ADDED BOTH, MALE FEMALE
+    private Gender_Enum gender; // ADDED BOTH, MALE FEMALE
 
 
     @OneToMany(mappedBy = "job", fetch = FetchType.LAZY , cascade = CascadeType.ALL)

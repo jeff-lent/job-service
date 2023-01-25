@@ -11,7 +11,7 @@ import com.xloop.resourceloop.createJob.Service.JobService;
 
 @RestController
 @RequestMapping("/job")
-@CrossOrigin(origins = "${app.cors.origin}")
+@CrossOrigin(origins = "${app.cors.origin:'http://localhost:3000'}")
 public class JobController {
     
 

@@ -38,7 +38,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-// @Disabled // For test the Job Controller remove the "@CrossOrigin(origins = "${app.cors.origin}")" line from job Controller class.
 public class Test_Job_Controller {
     
     private MockMvc mockMvc;

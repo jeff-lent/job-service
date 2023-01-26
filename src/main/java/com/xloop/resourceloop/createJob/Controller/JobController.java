@@ -1,6 +1,8 @@
 package com.xloop.resourceloop.createJob.Controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +32,26 @@ public class JobController {
             return ResponseEntity.badRequest().build();
         }
     } 
+
+    @PostMapping("/update/{id}")
+    public ResponseEntity<Job> updateJob(@PathVariable Long id, @RequestBody Job job ){
+        try {
+            job.setId(id);
+            return ResponseEntity.status(200).body(jobService.update(job));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+    }
     
-    
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String>  deleteJob(@PathVariable Long id){
+        try {
+            jobService.delete(id);
+            return ResponseEntity.ok().build();
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }

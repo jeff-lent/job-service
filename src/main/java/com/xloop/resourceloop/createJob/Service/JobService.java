@@ -1,5 +1,6 @@
 package com.xloop.resourceloop.createJob.Service;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -42,5 +43,8 @@ public class JobService {
         return;
     }
 
+    public List<Job> viewAllJob(){
+      return jobRepository.findAll();  
+    }
     
 }

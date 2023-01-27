@@ -1,7 +1,10 @@
 package com.xloop.resourceloop.createJob.Controller;
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,5 +56,10 @@ public class JobController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Job>> viewAllJob(){
+        return ResponseEntity.ok().body(jobService.viewAllJob());
     }
 }

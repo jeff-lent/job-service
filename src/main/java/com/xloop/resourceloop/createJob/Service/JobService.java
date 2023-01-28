@@ -1,5 +1,6 @@
 package com.xloop.resourceloop.createJob.Service;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -25,4 +26,25 @@ public class JobService {
         return jobRepository.save(job);
     }
 
+    public Job update(Job job){
+        job.setPostDate(new Date());
+        job.getResponsibilitiess().forEach(respons -> respons.setJob(job));
+        job.getBenefitPerkss().forEach(respons -> respons.setJob(job));
+        job.getEducations().forEach(respons -> respons.setJob(job));
+        job.getSoftSkills().forEach(ss -> ss.setJob(job));
+        job.getTechnicalSkills().forEach(ts -> ts.setJob(job));
+        return jobRepository.save(job);
+    }
+
+    
+    public void delete(Long id){
+        
+        jobRepository.deleteById(id);
+        return;
+    }
+
+    public List<Job> viewAllJob(){
+      return jobRepository.findAll();  
+    }
+    
 }

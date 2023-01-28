@@ -29,7 +29,5 @@ public class JobController {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
         }
-    } 
-    
-    
+    }     
 }

@@ -58,8 +58,14 @@ public class JobController {
         }
     }
 
+
     @GetMapping("/all")
     public ResponseEntity<List<Job>> viewAllJob(){
         return ResponseEntity.ok().body(jobService.viewAllJob());
+    }
+
+    @GetMapping("/checkingCICD")
+    public ResponseEntity<String> cicdTest(){
+        return ResponseEntity.ok().body("Hello From Cicd jobservice");
     }
 }

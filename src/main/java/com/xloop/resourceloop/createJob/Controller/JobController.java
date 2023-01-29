@@ -66,6 +66,6 @@ public class JobController {
 
     @GetMapping("/checkingCICD")
     public ResponseEntity<String> cicdTest(){
-        return ResponseEntity.ok().body("Hello From Cicd jobservice");
+        return ResponseEntity.ok().body("Hello From Cicd ");
     }
 }

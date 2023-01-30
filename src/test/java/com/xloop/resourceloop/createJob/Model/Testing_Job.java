@@ -3,10 +3,6 @@ package com.xloop.resourceloop.createJob.Model;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Employement_Enum;
-import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Gender_Enum;
-import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Traveling_Enum;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -47,20 +43,20 @@ class Testing_Job {
 
     @Test
     public void testEmploymentCategory() {
-        job.setEmployementCategory(List.of(Employement_Enum.FULL_TIME));
-        assertEquals(List.of(Employement_Enum.FULL_TIME), job.getEmployementCategory());
+        job.setEmployementCategory(List.of("FULL_TIME"));
+        assertEquals(List.of("FULL_TIME"), job.getEmployementCategory());
     }
 
     @Test
     public void testGender() {
-        job.setGender(Gender_Enum.MALE);
-        assertEquals(Gender_Enum.MALE, job.getGender());
+        job.setGender("MALE");
+        assertEquals("MALE", job.getGender());
     }
 
     @Test
     public void testTraveling() {
-        job.setTraveling(Traveling_Enum.NO);
-        assertEquals(Traveling_Enum.NO, job.getTraveling());
+        job.setTraveling("NO");
+        assertEquals("NO", job.getTraveling());
     }
 
     @Test

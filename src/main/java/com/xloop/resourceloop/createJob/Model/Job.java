@@ -3,9 +3,6 @@ package com.xloop.resourceloop.createJob.Model;
 import java.util.Date;
 import java.util.List;
 
-import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Employement_Enum;
-import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Gender_Enum;
-import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Traveling_Enum;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -80,16 +77,15 @@ public class Job {
     @Column(precision = 2, nullable = false)
     private int experienceLevel;
     
-    @Enumerated(EnumType.STRING)
+    // @Enumerated(EnumType.STRING)
     @Column( nullable = false)
-    private List<Employement_Enum> employementCategory; // LIST OF EMOLYEMENT TYPE WOULD SELECTED
+    private List<String> employementCategory; // LIST OF EMOLYEMENT TYPE WOULD SELECTED
     
     @Column( nullable = false)
     private int vacancyCount;
     
-    @Enumerated(EnumType.STRING)
     @Column( nullable = false)
-    private Gender_Enum gender; // ADDED BOTH, MALE FEMALE
+    private String gender; // ADDED BOTH, MALE FEMALE
 
 
     @OneToMany(mappedBy = "job", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
@@ -102,9 +98,9 @@ public class Job {
     @Column( nullable = false)
     private String location;
     
-    @Enumerated(EnumType.STRING)
+    // @Enumerated(EnumType.STRING)
     @Column( nullable = false)
-    private Traveling_Enum traveling;
+    private String traveling;
     
     
     @Column( nullable = false)

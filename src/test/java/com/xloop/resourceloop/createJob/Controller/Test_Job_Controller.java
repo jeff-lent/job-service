@@ -89,7 +89,7 @@ public class Test_Job_Controller {
             .andExpect(jsonPath("$.id").value(1L))
             .andExpect(jsonPath("$.title").value("Backend Engineer"))
             .andExpect(jsonPath("$.department").value("ClOUD_ENGINEER"))
-            .andExpect(jsonPath("$.employementCategory").value("FULL_TIME"))
+            .andExpect(jsonPath("$.employementCategory").value("FULL TIME"))
             .andExpect(jsonPath("$.gender").value("MALE"))
             .andExpect(jsonPath("$.traveling").value("NO"))
             .andExpect(jsonPath("$.location").value("KARACHI"))

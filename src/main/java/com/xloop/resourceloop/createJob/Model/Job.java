@@ -119,5 +119,5 @@ public class Job {
     //     responsibilitiess.add(responsibilities);
     // }
     
-
+    private boolean pasha=true;
 }

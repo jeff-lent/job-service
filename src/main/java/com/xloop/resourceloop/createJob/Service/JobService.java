@@ -1,6 +1,8 @@
 package com.xloop.resourceloop.createJob.Service;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -37,14 +39,37 @@ public class JobService {
     }
 
     
+    public Job getJobById(Long id){
+        return jobRepository.getById(id);
+    }
+
+
     public void delete(Long id){
         
-        jobRepository.deleteById(id);
-        return;
+        //jobRepository.deleteById(id);
+       //List<Job> allJobs = jobRepository.findAll();
+       //changing the value of isActive column.
+        Job pashaJob =  jobRepository.getById(id);
+        pashaJob.setPasha(false);
+       jobRepository.save(pashaJob);
+        
     }
 
     public List<Job> viewAllJob(){
-      return jobRepository.findAll();  
+      List<Job> allJobs =  jobRepository.findAll();
+     List<Job> activeJobs = allJobs.stream()
+     .filter(p -> p.isPasha() == true)
+     .collect(Collectors.toList());   
+     return activeJobs; 
     }
+
+    public List<Job> viewDeactivatedJobs() {
+        List<Job> allJobs =  jobRepository.findAll();
+        List<Job> deactivatedJobs = allJobs.stream().filter(a-> a.isPasha()==false).collect(Collectors.toList());
+        return deactivatedJobs;
+    }
+
+
+    
     
 }

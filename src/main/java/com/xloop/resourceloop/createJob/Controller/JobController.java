@@ -60,9 +60,17 @@ public class JobController {
     }
 
 
+
+
     @GetMapping("/all")
     public ResponseEntity<List<Job>> viewAllJob(){
         return ResponseEntity.ok().body(jobService.viewAllJob());
+    }
+
+
+    @GetMapping("/deactivated")
+    public ResponseEntity<List<Job>> viewDeactivatedJobs(){
+        return ResponseEntity.ok().body(jobService.viewDeactivatedJobs());
     }
 
     @GetMapping("/cicd")

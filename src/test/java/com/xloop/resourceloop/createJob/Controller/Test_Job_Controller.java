@@ -18,9 +18,6 @@ import com.xloop.resourceloop.createJob.Model.Job;
 import com.xloop.resourceloop.createJob.Model.Responsibilities;
 import com.xloop.resourceloop.createJob.Model.SoftSkill;
 import com.xloop.resourceloop.createJob.Model.technicalSkill;
-import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Employement_Enum;
-import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Gender_Enum;
-import com.xloop.resourceloop.createJob.Model.Control_Vocabulary.Traveling_Enum;
 import com.xloop.resourceloop.createJob.Service.JobService;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -64,9 +61,9 @@ public class Test_Job_Controller {
         job.setId(1L);
         job.setTitle("Backend Engineer");
         job.setDepartment("ClOUD_ENGINEER");
-        job.setEmployementCategory(List.of(Employement_Enum.FULL_TIME) );
-        job.setGender(Gender_Enum.MALE );
-        job.setTraveling(Traveling_Enum.NO);
+        job.setEmployementCategory(List.of("FULL TIME") );
+        job.setGender("MALE" );
+        job.setTraveling("NO");
         job.setLocation("KARACHI");
         job.setSoftSkills(List.of(new SoftSkill("Communication")));
         job.setTechnicalSkills(List.of(new technicalSkill("Java"), new technicalSkill("Junit")));
@@ -92,7 +89,7 @@ public class Test_Job_Controller {
             .andExpect(jsonPath("$.id").value(1L))
             .andExpect(jsonPath("$.title").value("Backend Engineer"))
             .andExpect(jsonPath("$.department").value("ClOUD_ENGINEER"))
-            .andExpect(jsonPath("$.employementCategory").value("FULL_TIME"))
+            .andExpect(jsonPath("$.employementCategory").value("FULL TIME"))
             .andExpect(jsonPath("$.gender").value("MALE"))
             .andExpect(jsonPath("$.traveling").value("NO"))
             .andExpect(jsonPath("$.location").value("KARACHI"))

@@ -42,6 +42,11 @@ public class JobService {
         jobRepository.deleteById(id);
         return;
     }
+    
+    public Job getAJob(Long id){
+        return jobRepository.getById(id);
+        
+    }
 
     public List<Job> viewAllJob(){
       return jobRepository.findAll();  

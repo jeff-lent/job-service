@@ -1,6 +1,7 @@
 package com.xloop.resourceloop.createJob.Controller;
 import java.util.List;
 
+import org.aspectj.weaver.World;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -58,8 +59,24 @@ public class JobController {
         }
     }
 
+
     @GetMapping("/all")
     public ResponseEntity<List<Job>> viewAllJob(){
         return ResponseEntity.ok().body(jobService.viewAllJob());
+    }
+
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<Job> getAJob(@PathVariable Long id){
+        try {
+            return ResponseEntity.ok().body(jobService.getAJob(id));
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }   
+
+    @GetMapping("/cicd")
+    public ResponseEntity<String> cicd(){
+        return ResponseEntity.ok().body("Message From Waqar: CICD Configuration has completed for my backend app (Job Service Application) ");
     }
 }

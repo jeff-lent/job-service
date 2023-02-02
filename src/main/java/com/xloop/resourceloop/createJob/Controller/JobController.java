@@ -65,6 +65,16 @@ public class JobController {
         return ResponseEntity.ok().body(jobService.viewAllJob());
     }
 
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<Job> getAJob(@PathVariable Long id){
+        try {
+            return ResponseEntity.ok().body(jobService.getAJob(id));
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }   
+
     @GetMapping("/cicd")
     public ResponseEntity<String> cicd(){
         return ResponseEntity.ok().body("Message From Waqar: CICD Configuration has completed for my backend app (Job Service Application) ");

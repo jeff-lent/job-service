@@ -68,7 +68,7 @@ public class JobController {
     @GetMapping("/detail/{id}")
     public ResponseEntity<Job> getAJob(@PathVariable Long id){
         try {
-            return ResponseEntity.ok().body(jobService.getAJob(id));
+            return ResponseEntity.ok().body(jobService.getAJob(id).get());
 
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();

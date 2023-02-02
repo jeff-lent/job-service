@@ -1,6 +1,7 @@
 package com.xloop.resourceloop.createJob.Service;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -43,8 +44,8 @@ public class JobService {
         return;
     }
     
-    public Job getAJob(Long id){
-        return jobRepository.getById(id);
+    public Optional<Job> getAJob(Long id) throws Exception{
+        return jobRepository.findById(id);
         
     }
 

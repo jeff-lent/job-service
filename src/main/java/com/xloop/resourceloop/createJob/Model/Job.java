@@ -1,6 +1,7 @@
 package com.xloop.resourceloop.createJob.Model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -98,17 +99,18 @@ public class Job {
 
     @ManyToMany( fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     @JoinTable( name = "JOB_SOFTSKILL_TABLE",
-
-    joinColumns = {
-            @JoinColumn(name = "job_id",referencedColumnName = "id")
-    },
-    inverseJoinColumns = {
-        @JoinColumn(name="soft_skill_id",referencedColumnName = "id")
-    }
-
-    )
-
+    joinColumns = {  @JoinColumn(name = "job_id",referencedColumnName = "id") },
+    inverseJoinColumns = { @JoinColumn(name="soft_skill_id",referencedColumnName = "id") })
     private Set<SoftSkill> softSkills; 
+
+
+    public void addSoftSkill(SoftSkill softSkill) {
+        if (this.softSkills == null) {
+            this.softSkills = new HashSet<>();
+        }
+        this.softSkills.add(softSkill);
+    }
+    
     
 
     @OneToMany(mappedBy = "job", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
@@ -138,5 +140,5 @@ public class Job {
     //     responsibilitiess.add(responsibilities);
     // }
     
-    private boolean pasha=true;
+    private boolean active=true;
 }

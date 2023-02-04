@@ -1,5 +1,7 @@
 package com.xloop.resourceloop.createJob.Service;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collector;
@@ -30,21 +32,17 @@ public class JobService {
         job.getResponsibilitiess().forEach(respons -> respons.setJob(job));
         job.getBenefitPerkss().forEach(respons -> respons.setJob(job));
         job.getEducations().forEach(respons -> respons.setJob(job));
-        
-        job.getSoftSkills().forEach(
-            ss -> 
-            {
-                softSkillRepository.findByName(ss.getSoftSkill()).orElseGet(() -> softSkillRepository.save(ss));
-                ss.setJobs(Set.of(job));
-            }
-            );
-
-        // Course savedCourse = courseRepository.findByName(course.getName()).orElseGet(() -> courseRepository.save(course));
-
-        // student.getCourses().add(savedCourse);
-        
         job.getTechnicalSkills().forEach(ts -> ts.setJob(job));
-        return jobRepository.save(job);
+
+        List<String> softSkillString = new ArrayList<String>();
+        job.getSoftSkills().forEach(ss -> softSkillString.add(ss.getSoftSkill()));
+        job.setSoftSkills(null);
+        jobRepository.save(job);
+        
+        Iterable<SoftSkill> allSoftSkill = softSkillRepository.findAllBySoftSkillIn(softSkillString);
+        allSoftSkill.forEach( ss->ss.addJob(job) );
+        job.setSoftSkills(new HashSet<>(softSkillRepository.saveAll(allSoftSkill)) );
+        return jobRepository.save(job);        
     }
 
     public Job update(Job job){
@@ -52,9 +50,20 @@ public class JobService {
         job.getResponsibilitiess().forEach(respons -> respons.setJob(job));
         job.getBenefitPerkss().forEach(respons -> respons.setJob(job));
         job.getEducations().forEach(respons -> respons.setJob(job));
-        //job.getSoftSkills().forEach(ss -> ss.setJob(job));
         job.getTechnicalSkills().forEach(ts -> ts.setJob(job));
-        return jobRepository.save(job);
+
+        // job.getSoftSkills().forEach(ss -> Set.of(job));
+        // return jobRepository.save(job);
+        
+        List<String> softSkillString = new ArrayList<String>();
+        job.getSoftSkills().forEach(ss -> softSkillString.add(ss.getSoftSkill()));
+        job.setSoftSkills(null);
+        jobRepository.save(job);
+        
+        Iterable<SoftSkill> allSoftSkill = softSkillRepository.findAllBySoftSkillIn(softSkillString);
+        allSoftSkill.forEach( ss->ss.addJob(job) );
+        job.setSoftSkills(new HashSet<>(softSkillRepository.saveAll(allSoftSkill)) );
+        return jobRepository.save(job);        
     }
 
     
@@ -69,15 +78,12 @@ public class JobService {
        //List<Job> allJobs = jobRepository.findAll();
        //changing the value of isActive column.
         Job pashaJob =  jobRepository.findById(id).get();
-        pashaJob.setPasha(false);
+        pashaJob.setActive(false);
        jobRepository.save(pashaJob);
         
     }
     
-    public Optional<Job> getAJob(Long id) throws Exception{
-        return jobRepository.findById(id);
-        
-    }
+  
     
     public Optional<Job> getAJob(Long id) throws Exception{
         return jobRepository.findById(id);
@@ -87,14 +93,14 @@ public class JobService {
     public List<Job> viewAllJob(){
       List<Job> allJobs =  jobRepository.findAll();
      List<Job> activeJobs = allJobs.stream()
-     .filter(p -> p.isPasha() == true)
+     .filter(p -> p.isActive() == true)
      .collect(Collectors.toList());   
      return activeJobs; 
     }
 
     public List<Job> viewDeactivatedJobs() {
         List<Job> allJobs =  jobRepository.findAll();
-        List<Job> deactivatedJobs = allJobs.stream().filter(a-> a.isPasha()==false).collect(Collectors.toList());
+        List<Job> deactivatedJobs = allJobs.stream().filter(a-> a.isActive()==false).collect(Collectors.toList());
         return deactivatedJobs;
     }
 

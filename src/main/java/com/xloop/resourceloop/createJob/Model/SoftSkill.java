@@ -1,6 +1,6 @@
 package com.xloop.resourceloop.createJob.Model;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,9 +11,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,9 +19,9 @@ import lombok.Setter;
 public class SoftSkill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Getter private Long id;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false)
     @Getter @Setter private String softSkill;
 
     // @JsonIgnore
@@ -36,6 +34,13 @@ public class SoftSkill {
     @Setter
     @ManyToMany(mappedBy = "softSkills",fetch = FetchType.LAZY)
     private Set<Job> jobs;
+    
+    public void addJob(Job job) {
+        if (this.jobs == null) {
+            this.jobs = new HashSet<>();
+        }
+        this.jobs.add(job);
+    }
     
     public SoftSkill(String SoftSkill){
         this.softSkill = SoftSkill;

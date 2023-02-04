@@ -82,9 +82,4 @@ public class JobController {
     public ResponseEntity<List<Job>> viewDeactivatedJobs(){
         return ResponseEntity.ok().body(jobService.viewDeactivatedJobs());
     }
-
-    @GetMapping("/cicd")
-    public ResponseEntity<String> cicd(){
-        return ResponseEntity.ok().body("Message From Waqar: CICD Configuration has completed for my backend app (Job Service Application) ");
-    }
 }

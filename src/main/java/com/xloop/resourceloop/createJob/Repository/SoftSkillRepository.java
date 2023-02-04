@@ -11,6 +11,7 @@ public interface SoftSkillRepository extends JpaRepository<SoftSkill,Long>{
     
     public Optional<SoftSkill> findBySoftSkill(String softSkill);
     public List<SoftSkill> findAllBySoftSkillIn(List<String> softSkills);
+    
     // public Iterable<SoftSkill> findAllBySoftSkill(Iterable<SoftSkill> softSkills);
 
 }

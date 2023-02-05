@@ -8,7 +8,9 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xloop.resourceloop.createJob.Model.Job;
 import com.xloop.resourceloop.createJob.Model.SoftSkill;
@@ -16,12 +18,14 @@ import com.xloop.resourceloop.createJob.Repository.JobRepository;
 import com.xloop.resourceloop.createJob.Repository.SoftSkillRepository;
 
 @Service
+@Transactional
 public class JobService {
     
     private final JobRepository jobRepository;
 
     private final SoftSkillRepository softSkillRepository;
 
+    @Autowired
     public JobService(JobRepository jobRepository ,SoftSkillRepository softSkillRepository ) {
         this.jobRepository = jobRepository;
         this.softSkillRepository= softSkillRepository;
@@ -83,6 +87,15 @@ public class JobService {
         
     }
     
+
+    public void autoDeleteJob(){
+        try {
+            jobRepository.autoDeleteJob(new Date());
+            return;
+        } catch (Exception e) {
+            System.out.println("Error"+e.getMessage());
+        }
+    }
   
     
     public Optional<Job> getAJob(Long id) throws Exception{
@@ -91,11 +104,12 @@ public class JobService {
     }
 
     public List<Job> viewAllJob(){
-      List<Job> allJobs =  jobRepository.findAll();
-     List<Job> activeJobs = allJobs.stream()
-     .filter(p -> p.isActive() == true)
-     .collect(Collectors.toList());   
-     return activeJobs; 
+        return jobRepository.findAll();
+    //   List<Job> allJobs =  jobRepository.findAll();
+    //  List<Job> activeJobs = allJobs.stream()
+    //  .filter(p -> p.isActive() == true)
+    //  .collect(Collectors.toList());   
+    //  return activeJobs; 
     }
 
     public List<Job> viewDeactivatedJobs() {

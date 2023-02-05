@@ -21,7 +21,7 @@ public class SoftSkill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     @Getter @Setter private String softSkill;
 
     // @JsonIgnore

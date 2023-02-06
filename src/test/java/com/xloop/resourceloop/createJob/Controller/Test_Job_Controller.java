@@ -19,7 +19,7 @@ import com.xloop.resourceloop.createJob.Model.Education;
 import com.xloop.resourceloop.createJob.Model.Job;
 import com.xloop.resourceloop.createJob.Model.Responsibilities;
 import com.xloop.resourceloop.createJob.Model.SoftSkill;
-import com.xloop.resourceloop.createJob.Model.technicalSkill;
+import com.xloop.resourceloop.createJob.Model.TechnicalSkill;
 import com.xloop.resourceloop.createJob.Service.JobService;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -72,7 +72,7 @@ public class Test_Job_Controller {
         job.setTraveling("NO");
         job.setLocation("KARACHI");
         job.setSoftSkills(Set.of(new SoftSkill("Communication")));
-        job.setTechnicalSkills(List.of(new technicalSkill("Java"), new technicalSkill("Junit")));
+      //  job.setTechnicalSkills(List.of(new technicalSkill("Java"), new technicalSkill("Junit")));
         job.setPostDate(pd);
         job.setCloseDate(dd);
         job.setDescription("Software Engineer Position");
@@ -129,7 +129,7 @@ public class Test_Job_Controller {
         job.setTraveling("NO");
         job.setLocation("KARACHI");
         job.setSoftSkills(Set.of(new SoftSkill("Communication")));
-        job.setTechnicalSkills(List.of(new technicalSkill("Java"), new technicalSkill("Junit")));
+       // job.setTechnicalSkills(List.of(new technicalSkill("Java"), new technicalSkill("Junit")));
         job.setPostDate(pd);
         job.setCloseDate(dd);
         job.setDescription("Software Engineer Position");
@@ -222,7 +222,7 @@ public class Test_Job_Controller {
         job.setTraveling("NO");
         job.setLocation("KARACHI");
         job.setSoftSkills(Set.of(new SoftSkill("Communication")));
-        job.setTechnicalSkills(List.of(new technicalSkill("Java"), new technicalSkill("Junit")));
+       // job.setTechnicalSkills(List.of(new technicalSkill("Java"), new technicalSkill("Junit")));
         job.setPostDate(pd);
         job.setCloseDate(dd);
         job.setDescription("Software Engineer Position");

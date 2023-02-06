@@ -70,7 +70,7 @@ public class SoftSkillController {
     // @PostMapping("/update/{id}")
     // public Void updateSoftSkill(@PathVariable Long id){
     //     try {
-    //         // softSkill.setId(id);
+            // softSkill.setId(id);
     //         softSkillService.reactiveSoftSkill(id);
     //     } catch (Exception e) {
     //         System.out.println(e.getMessage());

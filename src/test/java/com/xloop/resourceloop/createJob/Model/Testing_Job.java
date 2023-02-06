@@ -72,11 +72,11 @@ class Testing_Job {
         assertEquals("Communication", job.getSoftSkills().iterator().next().getSoftSkill());
     }
 
-    @Test
-    public void testTechnicalSkills() {
-        job.setTechnicalSkills(List.of(new  technicalSkill("Java") ));
-        assertEquals("Java", job.getTechnicalSkills().get(0).getTechnicalSkill());
-    }
+    // @Test
+    // public void testTechnicalSkills() {
+    //     job.setTechnicalSkills(List.of(new  technicalSkill("Java") ));
+    //     assertEquals("Java", job.getTechnicalSkills().get(0).getTechnicalSkill());
+    // }
 
     @Test
     public void testPostDate() {

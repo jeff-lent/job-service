@@ -107,12 +107,26 @@ public class Job {
     }
 
     )
-
     private Set<SoftSkill> softSkills; 
     
 
-    @OneToMany(mappedBy = "job", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
-    private List<technicalSkill> technicalSkills; 
+    // @OneToMany(mappedBy = "job", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    // private List<technicalSkill> technicalSkills; 
+
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(name="JOB_TECHNICALSKILL_TABLE",
+        joinColumns = {
+            @JoinColumn(name = "job_id",referencedColumnName = "id" )
+        },
+        inverseJoinColumns = {
+            @JoinColumn(name="technical_skill_id",referencedColumnName = "id")
+        }
+    )
+
+    private Set<TechnicalSkill> technicalSkills; 
+
+    
+
 
     @Column( nullable = false)
     private String location;

@@ -14,8 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xloop.resourceloop.createJob.Model.Job;
 import com.xloop.resourceloop.createJob.Model.SoftSkill;
+import com.xloop.resourceloop.createJob.Model.TechnicalSkill;
 import com.xloop.resourceloop.createJob.Repository.JobRepository;
 import com.xloop.resourceloop.createJob.Repository.SoftSkillRepository;
+import com.xloop.resourceloop.createJob.Repository.TechnicalSkillRepository;
 
 @Service
 @Transactional
@@ -25,10 +27,13 @@ public class JobService {
 
     private final SoftSkillRepository softSkillRepository;
 
+    private final TechnicalSkillRepository technicalSkillRepository;
+
     @Autowired
-    public JobService(JobRepository jobRepository ,SoftSkillRepository softSkillRepository ) {
+    public JobService(JobRepository jobRepository ,SoftSkillRepository softSkillRepository , TechnicalSkillRepository technicalSkillRepository ) {
         this.jobRepository = jobRepository;
         this.softSkillRepository= softSkillRepository;
+        this.technicalSkillRepository = technicalSkillRepository;
     }
 
     public Job save(Job job) {
@@ -36,7 +41,18 @@ public class JobService {
         job.getResponsibilitiess().forEach(respons -> respons.setJob(job));
         job.getBenefitPerkss().forEach(respons -> respons.setJob(job));
         job.getEducations().forEach(respons -> respons.setJob(job));
-        job.getTechnicalSkills().forEach(ts -> ts.setJob(job));
+        //job.getTechnicalSkills().forEach(ts -> ts.setJob(job));
+        
+        List<String> technicalSkillString = new ArrayList<String>();
+        job.getTechnicalSkills().forEach(ts -> technicalSkillString.add(ts.getTechnicalSkill()));   
+        //validation
+        job.setTechnicalSkills(null);
+        jobRepository.save(job);
+
+        Iterable<TechnicalSkill> allTechnicalSkill = technicalSkillRepository.findAllBySoftSkillInAndActiveIsTrue(technicalSkillString);
+        // allSoftSkill.forEach( ss->ss.addJob(job) );
+        // job.setSoftSkills(new HashSet<>(softSkillRepository.saveAll(allSoftSkill)) );
+
 
         List<String> softSkillString = new ArrayList<String>();
         job.getSoftSkills().forEach(ss -> softSkillString.add(ss.getSoftSkill()));
@@ -47,6 +63,7 @@ public class JobService {
         Iterable<SoftSkill> allSoftSkill = softSkillRepository.findAllBySoftSkillInAndActiveIsTrue(softSkillString);
         allSoftSkill.forEach( ss->ss.addJob(job) );
         job.setSoftSkills(new HashSet<>(softSkillRepository.saveAll(allSoftSkill)) );
+
         return jobRepository.save(job);        
     }
 
@@ -55,7 +72,7 @@ public class JobService {
         job.getResponsibilitiess().forEach(respons -> respons.setJob(job));
         job.getBenefitPerkss().forEach(respons -> respons.setJob(job));
         job.getEducations().forEach(respons -> respons.setJob(job));
-        job.getTechnicalSkills().forEach(ts -> ts.setJob(job));
+        //job.getTechnicalSkills().forEach(ts -> ts.setJob(job));
 
         // job.getSoftSkills().forEach(ss -> Set.of(job));
         // return jobRepository.save(job);

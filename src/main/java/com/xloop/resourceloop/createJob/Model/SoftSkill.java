@@ -16,6 +16,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Getter @Setter
+
 public class SoftSkill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +36,11 @@ public class SoftSkill {
     @Setter
     @ManyToMany(mappedBy = "softSkills",fetch = FetchType.LAZY)
     private Set<Job> jobs;
+
+
+    private boolean active=true;
+
+
     
     public void addJob(Job job) {
         if (this.jobs == null) {

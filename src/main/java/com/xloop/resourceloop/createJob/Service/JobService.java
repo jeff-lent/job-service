@@ -40,10 +40,11 @@ public class JobService {
 
         List<String> softSkillString = new ArrayList<String>();
         job.getSoftSkills().forEach(ss -> softSkillString.add(ss.getSoftSkill()));
+        //validation
         job.setSoftSkills(null);
         jobRepository.save(job);
         
-        Iterable<SoftSkill> allSoftSkill = softSkillRepository.findAllBySoftSkillIn(softSkillString);
+        Iterable<SoftSkill> allSoftSkill = softSkillRepository.findAllBySoftSkillInAndActiveIsTrue(softSkillString);
         allSoftSkill.forEach( ss->ss.addJob(job) );
         job.setSoftSkills(new HashSet<>(softSkillRepository.saveAll(allSoftSkill)) );
         return jobRepository.save(job);        

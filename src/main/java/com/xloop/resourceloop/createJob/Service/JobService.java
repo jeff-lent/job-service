@@ -47,11 +47,15 @@ public class JobService {
         job.getTechnicalSkills().forEach(ts -> technicalSkillString.add(ts.getTechnicalSkill()));   
         //validation
         job.setTechnicalSkills(null);
-        jobRepository.save(job);
+        // 
+       // jobRepository.save(job);
 
-        Iterable<TechnicalSkill> allTechnicalSkill = technicalSkillRepository.findAllBySoftSkillInAndActiveIsTrue(technicalSkillString);
+        Iterable<TechnicalSkill> allTechnicalSkill = technicalSkillRepository.findAllByTechnicalSkillInAndActiveIsTrue(technicalSkillString);
         // allSoftSkill.forEach( ss->ss.addJob(job) );
+        allTechnicalSkill.forEach(ts->ts.addJob(job));
         // job.setSoftSkills(new HashSet<>(softSkillRepository.saveAll(allSoftSkill)) );
+         job.setTechnicalSkills(new HashSet<>(technicalSkillRepository.saveAll(allTechnicalSkill)));   
+
 
 
         List<String> softSkillString = new ArrayList<String>();
@@ -77,14 +81,28 @@ public class JobService {
         // job.getSoftSkills().forEach(ss -> Set.of(job));
         // return jobRepository.save(job);
         
+        List<String> technicalSkillString = new ArrayList<String>();
+        job.getTechnicalSkills().forEach(ts->technicalSkillString.add(ts.getTechnicalSkill()));
+        job.setTechnicalSkills(null);
+        jobRepository.save(job);        
+
+        Iterable<TechnicalSkill> allTechnicalSkill = technicalSkillRepository.findAllByTechnicalSkillIn(technicalSkillString);
+        allTechnicalSkill.forEach( ts->ts.addJob(job) );
+        job.setTechnicalSkills(new HashSet<>(technicalSkillRepository.saveAll(allTechnicalSkill)) );
+
+
+
+
         List<String> softSkillString = new ArrayList<String>();
         job.getSoftSkills().forEach(ss -> softSkillString.add(ss.getSoftSkill()));
         job.setSoftSkills(null);
         jobRepository.save(job);
         
         Iterable<SoftSkill> allSoftSkill = softSkillRepository.findAllBySoftSkillIn(softSkillString);
-        allSoftSkill.forEach( ss->ss.addJob(job) );
+        allSoftSkill.forEach( ss->ss.addJob(job));
         job.setSoftSkills(new HashSet<>(softSkillRepository.saveAll(allSoftSkill)) );
+
+
         return jobRepository.save(job);        
     }
 

@@ -2,6 +2,7 @@ package com.xloop.resourceloop.createJob.Controller;
 
 import java.util.List;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,14 @@ public class SoftSkillController {
 
     @PostMapping("/add")
     public ResponseEntity<SoftSkill> addSoftSkill(@RequestBody SoftSkill softSkill){
-        return ResponseEntity.ok().body(softSkillService.addSoftSkill(softSkill));
+
+        try{
+            return ResponseEntity.ok().body(softSkillService.addSoftSkill(softSkill));
+        } catch(DataIntegrityViolationException e){
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+        
     }
 
     // @DeleteMapping("/delete/{id}")

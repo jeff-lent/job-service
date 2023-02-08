@@ -16,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -73,9 +74,16 @@ public class Job {
     @Column( nullable = false)
     private String description;
     
-    @Column( nullable = false)
-    private String department;
+    // @Column( nullable = false)
+    // private String department;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id",nullable = false)
+    private Department department;
+
+
+
+
     @OneToMany(mappedBy = "job", fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
     private List<Responsibilities> responsibilitiess;
     

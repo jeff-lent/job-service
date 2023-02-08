@@ -36,11 +36,11 @@ class Testing_Job {
         assertEquals(1L, job.getId().longValue());
     }
 
-    @Test
-    public void testDepartment() {
-        job.setDepartment("ClOUD_ENGINEER");
-        assertEquals("ClOUD_ENGINEER", job.getDepartment());
-    }
+    // @Test
+    // public void testDepartment() {
+    //     job.setDepartment("ClOUD_ENGINEER");
+    //     assertEquals("ClOUD_ENGINEER", job.getDepartment());
+    // }
 
     @Test
     public void testEmploymentCategory() {

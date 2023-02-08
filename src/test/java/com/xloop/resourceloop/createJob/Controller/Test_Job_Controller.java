@@ -66,7 +66,7 @@ public class Test_Job_Controller {
         Job job = new Job();
         job.setId(1L);
         job.setTitle("Backend Engineer");
-        job.setDepartment("ClOUD_ENGINEER");
+       // job.setDepartment("ClOUD_ENGINEER");
         job.setEmployementCategory(List.of("FULL TIME") );
         job.setGender("MALE" );
         job.setTraveling("NO");
@@ -123,7 +123,7 @@ public class Test_Job_Controller {
         Job job = new Job();
         job.setId(1L);
         job.setTitle("Backend Engineer");
-        job.setDepartment("ClOUD_ENGINEER");
+       // job.setDepartment("ClOUD_ENGINEER");
         job.setEmployementCategory(List.of("FULL TIME") );
         job.setGender("MALE" );
         job.setTraveling("NO");
@@ -216,7 +216,7 @@ public class Test_Job_Controller {
         Job job = new Job();
         job.setId(1L);
         job.setTitle("Backend Engineer");
-        job.setDepartment("ClOUD_ENGINEER");
+        //job.setDepartment("ClOUD_ENGINEER");
         job.setEmployementCategory(List.of("FULL TIME") );
         job.setGender("MALE" );
         job.setTraveling("NO");

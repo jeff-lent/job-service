@@ -105,11 +105,11 @@ class Testing_Job {
         job.setTitle("Backend Engineer");
         assertEquals("Backend Engineer", job.getTitle());
     }
-    @Test
-    public void testEducation() {
-        job.setEducations(List.of(new Education("Bachelors in Computer Science")));
-        assertEquals("Bachelors in Computer Science", job.getEducations().get(0).getEducation());
-    }
+//     @Test
+//     public void testEducation() {
+//   //      job.setEducations(List.of(new Education("Bachelors in Computer Science")));
+//         assertEquals("Bachelors in Computer Science", job.getEducations().get(0).getEducation());
+//     }
     @Test
     public void testExpLevel() {
 

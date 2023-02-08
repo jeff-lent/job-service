@@ -79,8 +79,24 @@ public class Job {
     @OneToMany(mappedBy = "job", fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
     private List<Responsibilities> responsibilitiess;
     
-    @OneToMany(mappedBy = "job", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
-    private List<Education> educations;
+    @ManyToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
+    @JoinTable(name="JOB_EDUCATION_TABLE",
+
+            joinColumns = {
+              @JoinColumn( name ="job_id",referencedColumnName="id")
+            },
+            inverseJoinColumns={
+                @JoinColumn(name="education_id",referencedColumnName = "id")
+            }
+    
+    )
+    private Set<Education> educations;
+
+
+
+
+    // @OneToMany(mappedBy = "job", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    // private List<Education> educations;
     
     @Column(precision = 2, nullable = false)
     private int experienceLevel;

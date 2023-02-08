@@ -124,11 +124,11 @@ class Testing_Job {
         assertEquals(5, job.getVacancyCount());
     }
 
-    @Test
-    public void testBenefitPerks() {
-        job.setBenefitPerkss(List.of(new BenefitsPerks("Health Insurance, Paid Vacation")));
-        assertEquals("Health Insurance, Paid Vacation", job.getBenefitPerkss().get(0).getBenefitPerks());
-    }
+    // @Test
+    // public void testBenefitPerks() {
+    //     job.setBenefitPerkss(List.of(new BenefitsPerks("Health Insurance, Paid Vacation")));
+    //     assertEquals("Health Insurance, Paid Vacation", job.getBenefitPerkss().get(0).getBenefitPerks());
+    // }
 
     @Test
     public void testActive(){

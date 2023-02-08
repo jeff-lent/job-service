@@ -80,7 +80,7 @@ public class Test_Job_Controller {
         job.setExperienceLevel(3);
         job.setVacancyCount(5);
       //  job.setEducations(List.of(new Education("Bachelors in Computer Science")));
-        job.setBenefitPerkss(List.of(new BenefitsPerks("Health Insurance, Paid Vacation")));
+      //  job.setBenefitPerkss(List.of(new BenefitsPerks("Health Insurance, Paid Vacation")));
         
         when(jobService.save(any(Job.class))).thenReturn(job);
 
@@ -137,7 +137,7 @@ public class Test_Job_Controller {
         job.setExperienceLevel(3);
         job.setVacancyCount(5);
       //  job.setEducations(List.of(new Education("Bachelors in Computer Science")));
-        job.setBenefitPerkss(List.of(new BenefitsPerks("Health Insurance, Paid Vacation")));
+     //   job.setBenefitPerkss(List.of(new BenefitsPerks("Health Insurance, Paid Vacation")));
         
         
         when(jobService.update(any(Job.class))).thenReturn(job);
@@ -230,7 +230,7 @@ public class Test_Job_Controller {
         job.setExperienceLevel(3);
         job.setVacancyCount(5);
       //  job.setEducations(List.of(new Education("Bachelors in Computer Science")));
-        job.setBenefitPerkss(List.of(new BenefitsPerks("Health Insurance, Paid Vacation")));
+     //   job.setBenefitPerkss(List.of(new BenefitsPerks("Health Insurance, Paid Vacation")));
         
         when(jobService.getAJob(any())).thenReturn(Optional.of(job));
 

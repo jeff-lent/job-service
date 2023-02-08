@@ -155,8 +155,21 @@ public class Job {
     @Column( nullable = false)
     private Date   postDate;
     
-    @OneToMany(mappedBy = "job",  fetch = FetchType.LAZY , cascade = CascadeType.ALL)
-    private List<BenefitsPerks> benefitPerkss;
+    // @OneToMany(mappedBy = "job",  fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    // private List<BenefitsPerks> benefitPerkss;
+    
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(name="JOB_BENIFITS_TABLE",
+        joinColumns = {
+            @JoinColumn(name="job_id",referencedColumnName = "id")
+        },
+        inverseJoinColumns = {
+            @JoinColumn(name="benefits_id",referencedColumnName = "id")
+        }
+    )    
+    private Set<BenefitsPerks> benefitPerkss;    
+
+        
 
     @Column( nullable = false)
     private Date   closeDate;

@@ -12,10 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xloop.resourceloop.createJob.Model.BenefitsPerks;
 import com.xloop.resourceloop.createJob.Model.Education;
 import com.xloop.resourceloop.createJob.Model.Job;
 import com.xloop.resourceloop.createJob.Model.SoftSkill;
 import com.xloop.resourceloop.createJob.Model.TechnicalSkill;
+import com.xloop.resourceloop.createJob.Repository.BenefitsPerksRepository;
 import com.xloop.resourceloop.createJob.Repository.EducationRepository;
 import com.xloop.resourceloop.createJob.Repository.JobRepository;
 import com.xloop.resourceloop.createJob.Repository.SoftSkillRepository;
@@ -33,18 +35,29 @@ public class JobService {
 
     private final EducationRepository educationRepository;
 
+    private final BenefitsPerksRepository benefitsPerksRepository;
+
     @Autowired
-    public JobService(JobRepository jobRepository ,SoftSkillRepository softSkillRepository , TechnicalSkillRepository technicalSkillRepository, EducationRepository educationRepository ) {
+    public JobService(JobRepository jobRepository ,SoftSkillRepository softSkillRepository , TechnicalSkillRepository technicalSkillRepository, EducationRepository educationRepository, BenefitsPerksRepository benefitsPerksRepository ) {
         this.jobRepository = jobRepository;
         this.softSkillRepository= softSkillRepository;
         this.technicalSkillRepository = technicalSkillRepository;
         this.educationRepository = educationRepository;
+        this.benefitsPerksRepository = benefitsPerksRepository;
     }
 
     public Job save(Job job) {
         job.setPostDate(new Date());
         job.getResponsibilitiess().forEach(respons -> respons.setJob(job));
-        job.getBenefitPerkss().forEach(respons -> respons.setJob(job));
+     //  job.getBenefitPerkss().forEach(respons -> respons.setJob(job));
+
+        List<String> benefitsPerksString = new ArrayList<String>();
+        job.getBenefitPerkss().forEach(ben -> benefitsPerksString.add(ben.getBenefitPerks()));   
+        job.setBenefitPerkss(null);
+
+        Iterable<BenefitsPerks> allBenefitsPerks = benefitsPerksRepository.findAllByBenefitPerksInAndActiveIsTrue(benefitsPerksString);
+        allBenefitsPerks.forEach(ben->ben.addJob(job));
+        job.setBenefitPerkss(new HashSet<>(benefitsPerksRepository.saveAll(allBenefitsPerks)));
         
         
         //job.getEducations().forEach(respons -> respons.setJob(job));
@@ -87,7 +100,7 @@ public class JobService {
         job.setSoftSkills(null);
         jobRepository.save(job);
         
-        Iterable<SoftSkill> allSoftSkill = softSkillRepository.findAllBySoftSkillInAndActiveIsTrue(softSkillString);
+        Iterable<SoftSkill> allSoftSkill = softSkillRepository.findAllBySoftSkillInAndActiveIsTrue(benefitsPerksString);
         allSoftSkill.forEach( ss->ss.addJob(job) );
         job.setSoftSkills(new HashSet<>(softSkillRepository.saveAll(allSoftSkill)) );
 
@@ -97,8 +110,28 @@ public class JobService {
     public Job update(Job job){
         job.setPostDate(new Date());
         job.getResponsibilitiess().forEach(respons -> respons.setJob(job));
-        job.getBenefitPerkss().forEach(respons -> respons.setJob(job));
+        //job.getBenefitPerkss().forEach(respons -> respons.setJob(job));
       //  job.getEducations().forEach(respons -> respons.setJob(job));
+
+        
+      List<String> benefitsPerksString = new ArrayList<String>();
+    //   job.getBenefitPerkss().forEach(ben->benefitsPerksString.add(ben.getBenefitPerks()));
+    job.getBenefitPerkss().forEach(ben -> benefitsPerksString.add(ben.getBenefitPerks()));   
+     job.setBenefitPerkss(null);
+     jobRepository.save(job);   
+
+    //   job.setTechnicalSkills(null);
+    //   jobRepository.save(job);        
+
+      Iterable<BenefitsPerks> allBenefitsPerks = benefitsPerksRepository.findAllByBenefitPerksIn(benefitsPerksString);
+      allBenefitsPerks.forEach( ben->ben.addJob(job) );
+      job.setBenefitPerkss(new HashSet<>(benefitsPerksRepository.saveAll(allBenefitsPerks)) );
+
+
+
+
+
+
 
         List<String> educationString = new ArrayList<String>();
         job.getEducations().forEach(edu->educationString.add(edu.getEducation()));

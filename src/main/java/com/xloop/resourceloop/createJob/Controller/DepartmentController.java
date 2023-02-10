@@ -14,37 +14,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xloop.resourceloop.createJob.Model.SoftSkill;
-import com.xloop.resourceloop.createJob.Repository.JobRepository;
-import com.xloop.resourceloop.createJob.Repository.SoftSkillRepository;
-import com.xloop.resourceloop.createJob.Service.JobService;
-import com.xloop.resourceloop.createJob.Service.DropDownService.SoftSkillService;
+import com.xloop.resourceloop.createJob.Model.Department;
+import com.xloop.resourceloop.createJob.Repository.DepartmentRepository;
+import com.xloop.resourceloop.createJob.Service.DropDownService.DepartmentService;
 
 @RestController
-@RequestMapping("/softSkill")
+@RequestMapping("/department")
 @CrossOrigin(origins = "${app.cors.origin:'http://localhost:3000'}")
-public class SoftSkillController {
-    
-    
-    @Autowired
-    private SoftSkillService softSkillService;
 
-
+public class DepartmentController {
+    
+    @Autowired 
+    DepartmentService departmentService;
+    
     @PostMapping("/add")
-    public ResponseEntity<SoftSkill> addSoftSkill(@RequestBody SoftSkill softSkill){
-        try{
-            return ResponseEntity.ok().body(softSkillService.add(softSkill));
-        } catch(DataIntegrityViolationException e){
+    public ResponseEntity<Department> addDepartment(@RequestBody Department department){
+        
+        try {
+            return ResponseEntity.ok().body(departmentService.add(department));
+        } catch (DataIntegrityViolationException e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
         }
+
     }
+
 
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String>  deleteJob(@PathVariable Long id){
+    public ResponseEntity<String> deleteDepartment(@PathVariable Long id) {
         try {
-            softSkillService.deactivate(id);
+            departmentService.deactivate(id);
             return ResponseEntity.ok().build();
 
         } catch (Exception e) {
@@ -53,10 +53,12 @@ public class SoftSkillController {
     }
 
 
+
+    
     @PostMapping("/reactive/{id}")
-    public ResponseEntity<String>  reactiveSoftSkill(@PathVariable Long id){
+    public ResponseEntity<String> reactiveDepartment(@PathVariable Long id) {
         try {
-            softSkillService.reactive(id);
+            departmentService.reactive(id);
             return ResponseEntity.ok().build();
 
         } catch (Exception e) {
@@ -64,18 +66,23 @@ public class SoftSkillController {
         }
     }
 
+
+    
     @PostMapping("/update/{id}")
-    public ResponseEntity<SoftSkill> updateSoftSkill( @PathVariable Long id, @RequestBody SoftSkill softSkill ){
+    public ResponseEntity<Department> updateSoftSkill(@PathVariable Long id,
+            @RequestBody Department department) {
         try {
-            softSkill.setId(id);
-            return ResponseEntity.ok().body(softSkillService.update(softSkill));
+            department.setId(id);
+            return ResponseEntity.ok().body(departmentService.update(department));
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
     }
 
+    
     @GetMapping("/all")
-    public ResponseEntity<List<SoftSkill>> viewAllSoftSkills(){
-        return ResponseEntity.ok().body(softSkillService.viewAll());
-    }
+    public ResponseEntity<List<Department>> getAllDeapartments(){
+        return ResponseEntity.ok().body(departmentService.viewAll());
+    } 
+
 }

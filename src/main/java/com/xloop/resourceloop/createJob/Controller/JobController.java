@@ -47,6 +47,8 @@ public class JobController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    
     
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String>  deleteJob(@PathVariable Long id){
@@ -58,8 +60,6 @@ public class JobController {
             return ResponseEntity.badRequest().build();
         }
     }
-
-
 
 
     @GetMapping("/all")

@@ -16,12 +16,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Department {
+@Entity
+public class Department implements GenericDropDownModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +34,12 @@ public class Department {
     @JsonIgnore
     @OneToMany(mappedBy = "department")
     private Set<Job> jobs = new HashSet<>();
+
+    public void addJobs(Job job){
+        jobs.add(job);
+    }
+    
+    private boolean active=true;
 
 
 }

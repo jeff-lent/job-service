@@ -31,9 +31,9 @@ class Testing_Job {
 
     @Test
     public void testId() {
-        job.setId(1L);
+        job.setId(10L);
         assertNotNull(job.getId());
-        assertEquals(1L, job.getId().longValue());
+        assertEquals(10L, job.getId().longValue());
     }
 
     // @Test

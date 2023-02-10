@@ -14,3 +14,4 @@ public interface TechnicalSkillRepository extends JpaRepository<TechnicalSkill,L
 
 
 }
+ 

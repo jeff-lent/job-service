@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -72,14 +75,16 @@ public class Job {
     private String title; 
     
     @Column( nullable = false)
+    @Lob
     private String description;
     
     // @Column( nullable = false)
     // private String department;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id",nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "department_id",nullable = true)
     private Department department;
+
 
 
 
@@ -190,4 +195,11 @@ public class Job {
     // }
     
     private boolean active=true;
+
+
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "job", fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
+    private List<JobApply> jobApplies;
+
 }

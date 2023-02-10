@@ -20,7 +20,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class BenefitsPerks {
+public class BenefitsPerks implements GenericDropDownModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xloop.resourceloop.createJob.ServiceInterface.GenericDropDown;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,7 +22,7 @@ import lombok.Setter;
 @Setter
 @Getter
 
-public class TechnicalSkill {
+public class TechnicalSkill implements GenericDropDownModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

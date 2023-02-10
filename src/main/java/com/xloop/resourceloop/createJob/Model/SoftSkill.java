@@ -18,7 +18,7 @@ import lombok.Setter;
 @Entity
 @Getter @Setter
 
-public class SoftSkill {
+public class SoftSkill implements GenericDropDownModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter private Long id;
@@ -38,9 +38,8 @@ public class SoftSkill {
     private Set<Job> jobs;
 
 
-    private boolean active=true;
-
-
+    
+    
     
     public void addJob(Job job) {
         if (this.jobs == null) {
@@ -55,5 +54,20 @@ public class SoftSkill {
     
     public SoftSkill(){
     }
+    
+    public boolean active=true;
 
+
+
+
+
+
+    public boolean isActive() {
+        return active;
+    }
+
+    @Override
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }

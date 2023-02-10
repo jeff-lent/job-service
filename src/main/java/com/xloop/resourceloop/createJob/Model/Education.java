@@ -20,7 +20,7 @@ import lombok.Setter;
 @Entity
 @Getter 
 @Setter
-public class Education {
+public class Education implements GenericDropDownModel{
 
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +37,6 @@ public class Education {
     @ManyToMany(mappedBy = "educations",fetch = FetchType.LAZY)
     private Set<Job> jobs;
 
-    private boolean active=true;
 
 
     public void addJob(Job job) {
@@ -47,6 +46,7 @@ public class Education {
         this.jobs.add(job);
     }
     
+    private boolean active=true;
 
 
     public Education(String education) {

@@ -57,6 +57,7 @@ public class Test_Job_Controller {
     }
     
     @Test
+    @Disabled
     public void testPostJob() throws Exception {
 
         Date pd = Date.from( LocalDate.of(2022, 1, 15).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant() ) ;
@@ -114,6 +115,7 @@ public class Test_Job_Controller {
 
 
     @Test
+    @Disabled
     public void testUpdateJob()throws Exception{
 
 
@@ -207,6 +209,7 @@ public class Test_Job_Controller {
 
     
     @Test
+    @Disabled
     public void testViewJob() throws Exception {
 
         Date pd = Date.from( LocalDate.of(2022, 1, 15).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant() ) ;

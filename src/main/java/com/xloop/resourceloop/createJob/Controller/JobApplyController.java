@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xloop.resourceloop.View.Message;
+import com.xloop.resourceloop.createJob.Integrating_Class.CandidatePersonalInfo;
+import com.xloop.resourceloop.createJob.Integrating_Class.UserProfile;
 import com.xloop.resourceloop.createJob.Model.JobApply;
 import com.xloop.resourceloop.createJob.Service.JobApplyService;
 
@@ -39,9 +41,20 @@ public class JobApplyController {
        }
     }
 
-    @GetMapping("/list")
-    public ResponseEntity<List<JobApply>> getAllAppliedJob(){
-      return  ResponseEntity.ok().body( jobApplyService.getAllAppliedJob() ) ;
+    @GetMapping("/list/{jobId}")
+    public ResponseEntity<List<CandidatePersonalInfo>> getAppliedCandidateForJob(@PathVariable Long jobId){
+
+      return jobApplyService.getAllAppliedCandidates(jobId);
+      
+      //checking list size
+      // if(candidates.spliterator().estimateSize()>0){
+      //   String candidateList = String.join(",",candidates);
+      //   return new UserProfile().getAllAppliedCandidate(candidateList);
+      // }else{
+      //   return ResponseEntity.noContent().build();
+      // }
+      //Join List into String
+
     } 
     
 }

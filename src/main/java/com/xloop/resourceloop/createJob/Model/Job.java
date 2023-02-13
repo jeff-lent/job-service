@@ -202,4 +202,8 @@ public class Job {
     @OneToMany(mappedBy = "job", fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
     private List<JobApply> jobApplies;
 
+
+    @Column(nullable = false)
+    private Long hmId;
+
 }

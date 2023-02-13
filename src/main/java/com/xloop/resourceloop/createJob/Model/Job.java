@@ -203,7 +203,6 @@ public class Job {
     private List<JobApply> jobApplies;
 
 
-    @Column(nullable = false)
     private Long hmId;
 
 }

@@ -30,7 +30,7 @@ public class JobApply {
 
     
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "job_id", nullable = false)
     private Job job;
 

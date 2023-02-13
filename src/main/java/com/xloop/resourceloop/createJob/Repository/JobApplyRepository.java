@@ -10,4 +10,5 @@ import com.xloop.resourceloop.createJob.Model.JobApply;
 public interface JobApplyRepository extends JpaRepository<JobApply, Long> {
     public Optional<JobApply> findByJobAndCandidateId(Job job, Long candidateId );
     public Iterable<JobApply>  findAllByJobId(Long jobId);
+    public Iterable<JobApply>  findAllByCandidateId(Long candidateId);
 }

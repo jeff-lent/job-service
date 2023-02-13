@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.xloop.resourceloop.View.Message;
 import com.xloop.resourceloop.createJob.Integrating_Class.CandidatePersonalInfo;
 import com.xloop.resourceloop.createJob.Integrating_Class.UserProfile;
+import com.xloop.resourceloop.createJob.Model.Job;
 import com.xloop.resourceloop.createJob.Model.JobApply;
 import com.xloop.resourceloop.createJob.Service.JobApplyService;
 
@@ -21,40 +22,56 @@ import com.xloop.resourceloop.createJob.Service.JobApplyService;
 @RequestMapping("/apply")
 @CrossOrigin(origins = "${app.cors.origin:'http://localhost:3000'}")
 public class JobApplyController {
-    
-    private final JobApplyService jobApplyService;
 
-    
+  private final JobApplyService jobApplyService;
 
-    public JobApplyController(JobApplyService jobApplyService) {
-        this.jobApplyService = jobApplyService;
+  public JobApplyController(JobApplyService jobApplyService) {
+    this.jobApplyService = jobApplyService;
+  }
+
+  @PostMapping("/job/{jobId}/candidate/{candidateId}")
+  public ResponseEntity<Message> applyJob(@PathVariable Long jobId, @PathVariable Long candidateId) {
+    try {
+      Message msg = new Message(jobApplyService.ApplyingJob(jobId, candidateId));
+      return ResponseEntity.accepted().body(msg);
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body(new Message(e.getMessage()));
     }
+  }
 
+  @GetMapping("/list/{jobId}")
+  public ResponseEntity<List<CandidatePersonalInfo>> getAppliedCandidateForJob(@PathVariable Long jobId) {
 
-    @PostMapping("/job/{jobId}/candidate/{candidateId}")
-    public ResponseEntity<Message> applyJob(@PathVariable Long jobId , @PathVariable Long candidateId ){
-       try {
-            Message msg = new Message(jobApplyService.ApplyingJob(jobId, candidateId));
-            return ResponseEntity.accepted().body(msg);
-       } catch (Exception e) {
-            return ResponseEntity.badRequest().body( new Message(e.getMessage()) );
-       }
-    }
+    return jobApplyService.getAllAppliedCandidates(jobId);
 
-    @GetMapping("/list/{jobId}")
-    public ResponseEntity<List<CandidatePersonalInfo>> getAppliedCandidateForJob(@PathVariable Long jobId){
+    // checking list size
+    // if(candidates.spliterator().estimateSize()>0){
+    // String candidateList = String.join(",",candidates);
+    // return new UserProfile().getAllAppliedCandidate(candidateList);
+    // }else{
+    // return ResponseEntity.noContent().build();
+    // }
+    // Join List into String
 
-      return jobApplyService.getAllAppliedCandidates(jobId);
+  }
+
+  @GetMapping("/list/getJob/{candidateId}")
+  public ResponseEntity<List<Job>> getAllAppliedJob(@PathVariable Long candidateId) {
+
+    List<Job> jobs = jobApplyService.getAllAppliedJob(candidateId);
+
+    // try {
+    //   if (jobs.isEmpty()) {
+    //     throw new Exception();
+    //   } 
+    return ResponseEntity.ok().body(jobs);
       
-      //checking list size
-      // if(candidates.spliterator().estimateSize()>0){
-      //   String candidateList = String.join(",",candidates);
-      //   return new UserProfile().getAllAppliedCandidate(candidateList);
-      // }else{
-      //   return ResponseEntity.noContent().build();
-      // }
-      //Join List into String
 
-    } 
-    
+    // } catch (Exception e) {
+    //   // TODO: handle exception
+    //   ResponseEntity.badRequest().build();
+    // }
+
+  }
+
 }

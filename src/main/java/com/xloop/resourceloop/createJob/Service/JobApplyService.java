@@ -60,4 +60,21 @@ public class JobApplyService {
 
     }
 
+    public List<Job> getAllAppliedJob(Long candidateId) {
+
+
+        Iterable<JobApply> appliedJobs = jobApplyRepository.findAllByCandidateId(candidateId);
+
+        
+        if (appliedJobs.spliterator().estimateSize() > 0) { // checking list size
+            List<Job> jobs = StreamSupport.stream(appliedJobs.spliterator() , false).map(
+                aj->aj.getJob()
+                ).collect(Collectors.toList());
+            return jobs;
+        } else {
+            return List.of();
+        }
+       
+    }
+
 }

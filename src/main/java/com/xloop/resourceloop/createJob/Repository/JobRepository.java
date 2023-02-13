@@ -1,6 +1,7 @@
 package com.xloop.resourceloop.createJob.Repository;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -19,4 +20,5 @@ public interface JobRepository extends JpaRepository<Job,Long>{
     @Query("UPDATE Job SET active = false WHERE closeDate <= :currentDate AND active = true")
     public void autoDeleteJob(@Param("currentDate") Date currentDate) throws Exception;
 
+    public List<Job> findAllByIdIn(List<Long> jobId);
 }

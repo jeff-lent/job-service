@@ -75,7 +75,7 @@ public class Job {
     private String title; 
     
     @Column( nullable = false)
-    @Lob
+    // @Lob
     private String description;
     
     // @Column( nullable = false)

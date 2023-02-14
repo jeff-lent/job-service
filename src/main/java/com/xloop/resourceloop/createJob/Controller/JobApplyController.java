@@ -60,17 +60,15 @@ public class JobApplyController {
 
     List<Job> jobs = jobApplyService.getAllAppliedJob(candidateId);
 
-    // try {
-    //   if (jobs.isEmpty()) {
-    //     throw new Exception();
-    //   } 
-    return ResponseEntity.ok().body(jobs);
-      
+    try {
+      if (jobs.isEmpty()) {
+        throw new Error("Empty Job list");
+      }
+      return ResponseEntity.ok().body(jobs);
 
-    // } catch (Exception e) {
-    //   // TODO: handle exception
-    //   ResponseEntity.badRequest().build();
-    // }
+    } catch (Exception e) {
+       return ResponseEntity.badRequest().build();
+    }
 
   }
 

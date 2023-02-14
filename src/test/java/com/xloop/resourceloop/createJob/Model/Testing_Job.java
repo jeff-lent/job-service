@@ -97,8 +97,8 @@ class Testing_Job {
 
     @Test
     public void testResponsibilities() {
-        job.setResponsibilitiess(List.of(new Responsibilities("Develop and maintain software applications")));
-        assertEquals("Develop and maintain software applications", job.getResponsibilitiess().get(0).getResponsibility());
+        job.setResponsibilities("Develop and maintain software applications");
+        assertEquals("Develop and maintain software applications", job.getResponsibilities());
     }
     @Test
     public void testTitle() {

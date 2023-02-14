@@ -89,8 +89,8 @@ public class Job {
 
 
 
-    @OneToMany(mappedBy = "job", fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
-    private List<Responsibilities> responsibilitiess;
+    @Column( nullable = false)
+    private String responsibilities;
     
     @ManyToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
     @JoinTable(name="JOB_EDUCATION_TABLE",

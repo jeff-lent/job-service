@@ -58,7 +58,6 @@ public class JobService {
 
     public Job save(Job job) {
         job.setPostDate(new Date());
-        job.getResponsibilitiess().forEach(respons -> respons.setJob(job));
         // job.getBenefitPerkss().forEach(respons -> respons.setJob(job));
 
         List<String> benefitsPerksString = new ArrayList<String>();
@@ -130,7 +129,6 @@ public class JobService {
 
     public Job update(Job job) {
         job.setPostDate(new Date());
-        job.getResponsibilitiess().forEach(respons -> respons.setJob(job));
         // job.getBenefitPerkss().forEach(respons -> respons.setJob(job));
         // job.getEducations().forEach(respons -> respons.setJob(job));
 

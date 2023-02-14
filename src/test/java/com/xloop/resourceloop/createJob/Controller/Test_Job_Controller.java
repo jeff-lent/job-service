@@ -17,7 +17,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xloop.resourceloop.createJob.Model.BenefitsPerks;
 import com.xloop.resourceloop.createJob.Model.Education;
 import com.xloop.resourceloop.createJob.Model.Job;
-import com.xloop.resourceloop.createJob.Model.Responsibilities;
 import com.xloop.resourceloop.createJob.Model.SoftSkill;
 import com.xloop.resourceloop.createJob.Model.TechnicalSkill;
 import com.xloop.resourceloop.createJob.Service.JobService;
@@ -77,7 +76,7 @@ public class Test_Job_Controller {
         job.setPostDate(pd);
         job.setCloseDate(dd);
         job.setDescription("Software Engineer Position");
-        job.setResponsibilitiess(List.of(new Responsibilities("Develop and maintain software applications")));
+        job.setResponsibilities("Develop and maintain software applications");
         job.setExperienceLevel(3);
         job.setVacancyCount(5);
       //  job.setEducations(List.of(new Education("Bachelors in Computer Science")));
@@ -135,7 +134,7 @@ public class Test_Job_Controller {
         job.setPostDate(pd);
         job.setCloseDate(dd);
         job.setDescription("Software Engineer Position");
-        job.setResponsibilitiess(List.of(new Responsibilities("Develop and maintain software applications")));
+        job.setResponsibilities("Develop and maintain software applications");
         job.setExperienceLevel(3);
         job.setVacancyCount(5);
       //  job.setEducations(List.of(new Education("Bachelors in Computer Science")));
@@ -229,7 +228,7 @@ public class Test_Job_Controller {
         job.setPostDate(pd);
         job.setCloseDate(dd);
         job.setDescription("Software Engineer Position");
-        job.setResponsibilitiess(List.of(new Responsibilities("Develop and maintain software applications")));
+        job.setResponsibilities("Develop and maintain software applications");
         job.setExperienceLevel(3);
         job.setVacancyCount(5);
       //  job.setEducations(List.of(new Education("Bachelors in Computer Science")));
@@ -259,7 +258,7 @@ public class Test_Job_Controller {
             .andExpect(jsonPath("$.description").value("Software Engineer Position"))
             .andExpect(jsonPath("$.experienceLevel").value(3))
             .andExpect(jsonPath("$.vacancyCount").value(5))
-            .andExpect(jsonPath("$.responsibilitiess[0].responsibility").value("Develop and maintain software applications"))
+            .andExpect(jsonPath("$.responsibilities").value("Develop and maintain software applications"))
             .andExpect(jsonPath("$.educations[0].education").value("Bachelors in Computer Science"))
             .andExpect(jsonPath("$.benefitPerkss[0].benefitPerks").value("Health Insurance, Paid Vacation"));
     }

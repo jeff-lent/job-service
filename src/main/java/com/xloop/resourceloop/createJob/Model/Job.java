@@ -74,8 +74,7 @@ public class Job {
     @Column( nullable = false)
     private String title; 
     
-    @Column( nullable = false)
-    // @Lob
+    @Column( columnDefinition ="TEXT" , nullable = false)
     private String description;
     
     // @Column( nullable = false)
@@ -89,7 +88,7 @@ public class Job {
 
 
 
-    @Column( nullable = false)
+    @Column( columnDefinition ="TEXT" , nullable = false)
     private String responsibilities;
     
     @ManyToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
@@ -198,9 +197,17 @@ public class Job {
 
 
 
-    @JsonIgnore
+    // @JsonIgnore
     @OneToMany(mappedBy = "job", fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
     private List<JobApply> jobApplies;
+
+
+
+    public int getJobApplies() {
+        return jobApplies.size();
+    }
+
+
 
 
     private Long hmId;

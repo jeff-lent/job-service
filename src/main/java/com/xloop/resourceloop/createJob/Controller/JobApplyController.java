@@ -58,12 +58,10 @@ public class JobApplyController {
   @GetMapping("/list/getJob/{candidateId}")
   public ResponseEntity<List<Job>> getAllAppliedJob(@PathVariable Long candidateId) {
 
-    List<Job> jobs = jobApplyService.getAllAppliedJob(candidateId);
-
     try {
-      if (jobs.isEmpty()) {
-        throw new Error("Empty Job list");
-      }
+      List<Job> jobs = jobApplyService.getAllAppliedJob(candidateId);
+
+      
       return ResponseEntity.ok().body(jobs);
 
     } catch (Exception e) {

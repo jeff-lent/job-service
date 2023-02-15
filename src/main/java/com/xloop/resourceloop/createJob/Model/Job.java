@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -197,14 +199,14 @@ public class Job {
 
 
 
-    // @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @OneToMany(mappedBy = "job", fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
     private List<JobApply> jobApplies;
 
 
-
+    @JsonIgnoreProperties
     public int getJobApplies() {
-        return jobApplies.size();
+        return jobApplies==null ? 0: jobApplies.size();
     }
 
 

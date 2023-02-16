@@ -1,9 +1,10 @@
-package com.xloop.resourceloop.createJob.Model;
+package com.xloop.resourceloop.createJob.Model.DropDownModel;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xloop.resourceloop.createJob.Model.Job;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,7 +33,7 @@ public class Department implements GenericDropDownModel {
     private String departmentName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "departments")
     private Set<Job> jobs = new HashSet<>();
 
     public void addJobs(Job job){

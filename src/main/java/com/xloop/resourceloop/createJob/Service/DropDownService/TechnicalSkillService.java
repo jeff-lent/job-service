@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.xloop.resourceloop.createJob.Model.TechnicalSkill;
+import com.xloop.resourceloop.createJob.Model.DropDownModel.TechnicalSkill;
 import com.xloop.resourceloop.createJob.Repository.TechnicalSkillRepository;
 import com.xloop.resourceloop.createJob.ServiceInterface.GenericDropDown;
 import com.xloop.resourceloop.createJob.ServiceInterface.InterfaceForDropDowns;

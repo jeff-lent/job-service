@@ -3,7 +3,8 @@ package com.xloop.resourceloop.createJob.ServiceInterface;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.xloop.resourceloop.createJob.Model.GenericDropDownModel;
+
+import com.xloop.resourceloop.createJob.Model.DropDownModel.GenericDropDownModel;
 
 public class GenericDropDown< T extends GenericDropDownModel , S extends JpaRepository<T,Long>>{
     

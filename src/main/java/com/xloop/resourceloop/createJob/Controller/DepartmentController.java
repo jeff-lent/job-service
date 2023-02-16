@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xloop.resourceloop.createJob.Model.Department;
+import com.xloop.resourceloop.createJob.Model.DropDownModel.Department;
 import com.xloop.resourceloop.createJob.Repository.DepartmentRepository;
 import com.xloop.resourceloop.createJob.Service.DropDownService.DepartmentService;
 

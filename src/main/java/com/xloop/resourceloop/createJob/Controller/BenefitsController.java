@@ -14,21 +14,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xloop.resourceloop.createJob.Model.BenefitsPerks;
-import com.xloop.resourceloop.createJob.Service.DropDownService.BenefitsPerksService;
+import com.xloop.resourceloop.createJob.Model.DropDownModel.Benefits;
+import com.xloop.resourceloop.createJob.Service.DropDownService.BenefitsService;
 
 @RestController
 @RequestMapping("/benefits")
 @CrossOrigin(origins = "${app.cors.origin:'http://localhost:3000'}")
-public class BenefitsPerksController {
+public class BenefitsController {
 
     @Autowired
-    private BenefitsPerksService benefitsPerksService;
+    private BenefitsService benefitsService;
 
     @PostMapping("/add")
-    public ResponseEntity<BenefitsPerks> addTechnicalSkill(@RequestBody BenefitsPerks benefitsPerks) {
+    public ResponseEntity<Benefits> addTechnicalSkill(@RequestBody Benefits benefits) {
             try {
-            return ResponseEntity.ok().body(benefitsPerksService.add(benefitsPerks));
+            return ResponseEntity.ok().body(benefitsService.add(benefits));
         } catch (DataIntegrityViolationException e) {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
@@ -38,7 +38,7 @@ public class BenefitsPerksController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteJob(@PathVariable Long id) {
         try {
-            benefitsPerksService.deactivate(id);
+            benefitsService.deactivate(id);
             return ResponseEntity.ok().build();
 
         } catch (Exception e) {
@@ -47,9 +47,9 @@ public class BenefitsPerksController {
     }
 
     @PostMapping("/reactive/{id}")
-    public ResponseEntity<String> reactiveBenefitsPerks(@PathVariable Long id) {
+    public ResponseEntity<String> reactiveBenefits(@PathVariable Long id) {
         try {
-            benefitsPerksService.reactive(id);
+            benefitsService.reactive(id);
             return ResponseEntity.ok().build();
 
         } catch (Exception e) {
@@ -58,19 +58,19 @@ public class BenefitsPerksController {
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<BenefitsPerks> updateBenefitPerk(@PathVariable Long id,
-            @RequestBody BenefitsPerks benefitsPerks) {
+    public ResponseEntity<Benefits> updateBenefitPerk(@PathVariable Long id,
+            @RequestBody Benefits benefits) {
         try {
-            benefitsPerks.setId(id);
-            return ResponseEntity.ok().body(benefitsPerksService.update(benefitsPerks));
+            benefits.setId(id);
+            return ResponseEntity.ok().body(benefitsService.update(benefits));
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<BenefitsPerks>> viewAllTechnicalSkills() {
-        return ResponseEntity.ok().body(benefitsPerksService.viewAll());
+    public ResponseEntity<List<Benefits>> viewAllTechnicalSkills() {
+        return ResponseEntity.ok().body(benefitsService.viewAll());
     }
 
 }

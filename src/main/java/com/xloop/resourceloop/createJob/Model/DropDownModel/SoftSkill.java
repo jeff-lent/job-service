@@ -1,9 +1,10 @@
-package com.xloop.resourceloop.createJob.Model;
+package com.xloop.resourceloop.createJob.Model.DropDownModel;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xloop.resourceloop.createJob.Model.Job;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,12 +25,7 @@ public class SoftSkill implements GenericDropDownModel {
     @Getter private Long id;
 
     @Column(nullable = false, unique = true)
-    @Getter @Setter private String softSkill;
-
-    // @JsonIgnore
-    // @ManyToOne(fetch = FetchType.LAZY)
-    // @JoinColumn(name = "job_id")
-    // @Getter @Setter private set<Job> job;
+    @Getter @Setter private String softSkillName;
 
     @JsonIgnore
     @Getter
@@ -38,8 +34,7 @@ public class SoftSkill implements GenericDropDownModel {
     private Set<Job> jobs;
 
 
-    
-    
+
     
     public void addJob(Job job) {
         if (this.jobs == null) {
@@ -49,18 +44,13 @@ public class SoftSkill implements GenericDropDownModel {
     }
     
     public SoftSkill(String SoftSkill){
-        this.softSkill = SoftSkill;
+        this.softSkillName = SoftSkill;
     }
     
     public SoftSkill(){
     }
     
     public boolean active=true;
-
-
-
-
-
 
     public boolean isActive() {
         return active;

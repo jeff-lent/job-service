@@ -5,15 +5,15 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.xloop.resourceloop.createJob.Model.SoftSkill;
+import com.xloop.resourceloop.createJob.Model.DropDownModel.SoftSkill;
 
 public interface SoftSkillRepository extends JpaRepository<SoftSkill,Long>{
     
-    public Optional<SoftSkill> findBySoftSkill(String softSkill);
-    public List<SoftSkill> findAllBySoftSkillIn(List<String> softSkills);
+    public Optional<SoftSkill> findBySoftSkillName(String softSkill);
+    public List<SoftSkill> findAllBySoftSkillNameIn(List<String> softSkills);
     // public List<SoftSkill> findAllByActiveIsTrue();
 
-    List<SoftSkill> findAllBySoftSkillInAndActiveIsTrue(List<String> softSkillString);
+    List<SoftSkill> findAllBySoftSkillNameInAndActiveIsTrue(List<String> softSkillString);
 
 //     @Query("SELECT u FROM User u WHERE u.email = ?1")
 //   public SoftSkill activeJob(String email);

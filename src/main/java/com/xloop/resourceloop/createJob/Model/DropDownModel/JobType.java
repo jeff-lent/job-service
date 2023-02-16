@@ -1,10 +1,10 @@
-package com.xloop.resourceloop.createJob.Model;
+package com.xloop.resourceloop.createJob.Model.DropDownModel;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.xloop.resourceloop.createJob.ServiceInterface.GenericDropDown;
+import com.xloop.resourceloop.createJob.Model.Job;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,40 +12,31 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Setter
-@Getter
+@Getter @Setter
+@NoArgsConstructor
+public class JobType implements GenericDropDownModel{
 
-public class TechnicalSkill implements GenericDropDownModel {
 
-    @Id
+    @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false,unique = true)
-    @Getter @Setter private String technicalSkill;
-
-    // @JsonIgnore
-    // @ManyToOne(fetch = FetchType.LAZY)
-    // @JoinColumn(name = "job_id")
-    // @Getter @Setter private Job job;
+    private String jobTypeName;
 
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "technicalSkills",fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "jobTypes",fetch = FetchType.LAZY)
     private Set<Job> jobs;
 
 
-    private boolean active=true;
 
-
-    
     public void addJob(Job job) {
         if (this.jobs == null) {
             this.jobs = new HashSet<>();
@@ -53,11 +44,10 @@ public class TechnicalSkill implements GenericDropDownModel {
         this.jobs.add(job);
     }
     
+    private boolean active=true;
 
-    public TechnicalSkill(String technicalSkill){
-        this.technicalSkill = technicalSkill;
+    public JobType(String type) {
+        this.jobTypeName = type;
     }
 
-
-    public TechnicalSkill() {}
 }

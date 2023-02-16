@@ -1,9 +1,10 @@
-package com.xloop.resourceloop.createJob.Model;
+package com.xloop.resourceloop.createJob.Model.DropDownModel;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xloop.resourceloop.createJob.Model.Job;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,13 +28,9 @@ public class Education implements GenericDropDownModel{
     private Long id;
 
     @Column(nullable = false,unique = true)
-    @Getter @Setter private String education;
+    @Getter @Setter private String educationName;
 
     @JsonIgnore
-    // @ManyToOne(fetch = FetchType.LAZY)
-    // @JoinColumn(name = "job_id", nullable = false)
-    // @Getter @Setter private Job job;
-    
     @ManyToMany(mappedBy = "educations",fetch = FetchType.LAZY)
     private Set<Job> jobs;
 
@@ -50,7 +47,7 @@ public class Education implements GenericDropDownModel{
 
 
     public Education(String education) {
-        this.education = education;
+        this.educationName = education;
     }
 
     public Education() {

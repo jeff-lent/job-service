@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.xloop.resourceloop.createJob.Model.Education;
+import com.xloop.resourceloop.createJob.Model.DropDownModel.Education;
 import com.xloop.resourceloop.createJob.Repository.EducationRepository;
 import com.xloop.resourceloop.createJob.ServiceInterface.InterfaceForDropDowns;
 import com.xloop.resourceloop.createJob.ServiceInterface.GenericDropDown;

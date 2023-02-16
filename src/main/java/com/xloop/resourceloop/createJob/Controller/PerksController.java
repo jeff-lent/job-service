@@ -14,43 +14,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xloop.resourceloop.createJob.Model.DropDownModel.TechnicalSkill;
-import com.xloop.resourceloop.createJob.Repository.TechnicalSkillRepository;
-// import com.xloop.resourceloop.createJob.Service.SoftSkillService;
-import com.xloop.resourceloop.createJob.Service.DropDownService.TechnicalSkillService;
+import com.xloop.resourceloop.createJob.Model.DropDownModel.Benefits;
+import com.xloop.resourceloop.createJob.Model.DropDownModel.Perks;
+import com.xloop.resourceloop.createJob.Service.DropDownService.BenefitsService;
+import com.xloop.resourceloop.createJob.Service.DropDownService.PerksService;
 
 @RestController
-@RequestMapping("/technicalSkill")
+@RequestMapping("/perks")
 @CrossOrigin(origins = "${app.cors.origin:'http://localhost:3000'}")
-public class TechnicalSkillController {
-
+public class PerksController {
     @Autowired
-    private TechnicalSkillService technicalSkillService;
-
-    // @Autowired
-    // private TechnicalSkillRepository technicalSkillRepository;
-
-    // public TechnicalSkillController(TechnicalSkillService technicalSkillService )
-    // {
-    // this.technicalSkillService = technicalSkillService;
-    // }
+    private PerksService perksService;
 
     @PostMapping("/add")
-    public ResponseEntity<TechnicalSkill> addTechnicalSkill(@RequestBody TechnicalSkill technicalSkill) {
-
-        try {
-            return ResponseEntity.ok().body(technicalSkillService.add(technicalSkill));
+    public ResponseEntity<Perks> addTechnicalSkill(@RequestBody Perks perks) {
+            try {
+            return ResponseEntity.ok().body(perksService.add(perks));
         } catch (DataIntegrityViolationException e) {
-            System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
         }
-
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteJob(@PathVariable Long id) {
         try {
-            technicalSkillService.deactivate(id);
+            perksService.deactivate(id);
             return ResponseEntity.ok().build();
 
         } catch (Exception e) {
@@ -59,9 +47,9 @@ public class TechnicalSkillController {
     }
 
     @PostMapping("/reactive/{id}")
-    public ResponseEntity<String> reactiveTechnicalSkill(@PathVariable Long id) {
+    public ResponseEntity<String> reactiveBenefitsPerks(@PathVariable Long id) {
         try {
-            technicalSkillService.reactive(id);
+            perksService.reactive(id);
             return ResponseEntity.ok().build();
 
         } catch (Exception e) {
@@ -70,19 +58,18 @@ public class TechnicalSkillController {
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<TechnicalSkill> updateSoftSkill(@PathVariable Long id,
-            @RequestBody TechnicalSkill technicalSkill) {
+    public ResponseEntity<Perks> updateBenefitPerk(@PathVariable Long id,
+            @RequestBody Perks perks) {
         try {
-            technicalSkill.setId(id);
-            return ResponseEntity.ok().body(technicalSkillService.update(technicalSkill));
+            perks.setId(id);
+            return ResponseEntity.ok().body(perksService.update(perks));
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<TechnicalSkill>> viewAllTechnicalSkills() {
-        return ResponseEntity.ok().body(technicalSkillService.viewAll());
+    public ResponseEntity<List<Perks>> viewAllTechnicalSkills() {
+        return ResponseEntity.ok().body(perksService.viewAll());
     }
-
 }

@@ -1,9 +1,10 @@
-package com.xloop.resourceloop.createJob.Model;
+package com.xloop.resourceloop.createJob.Model.DropDownModel;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xloop.resourceloop.createJob.Model.Job;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,26 +12,23 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class BenefitsPerks implements GenericDropDownModel {
-
+public class Perks implements GenericDropDownModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @Column(nullable = false)
-    @Getter @Setter private String benefitPerks;
+    @Getter @Setter private String perksName;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "benefitPerkss",fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "perks",fetch = FetchType.LAZY)
      private Set<Job> jobs;
 
      private boolean active=true;
@@ -45,11 +43,10 @@ public class BenefitsPerks implements GenericDropDownModel {
     }
    
 
-    public BenefitsPerks(String benefitPerks) {
-        this.benefitPerks = benefitPerks;
+    public Perks(String Perks) {
+        this.perksName = Perks;
     }
 
-    public BenefitsPerks() {
+    public Perks() {
     }
-
 }

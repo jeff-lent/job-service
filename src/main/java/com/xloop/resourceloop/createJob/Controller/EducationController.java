@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xloop.resourceloop.createJob.Model.Education;
+import com.xloop.resourceloop.createJob.Model.DropDownModel.Education;
 import com.xloop.resourceloop.createJob.Service.DropDownService.EducationService;
 
 @RestController

@@ -49,11 +49,12 @@ public class JobApplyService {
 
         Iterable<JobApply> candidates = jobApplyRepository.findAllByJobId(id);
         if (candidates.spliterator().estimateSize() > 0) { // checking list size
-            List<JobApply> listOfJobApply = StreamSupport.stream(candidates.spliterator(), false).collect(Collectors.toList()) ; 
+            List<JobApply> listOfJobApply = StreamSupport.stream(candidates.spliterator(), false)
+                    .collect(Collectors.toList());
             String candidateList = listOfJobApply.stream()
                     .map(jp -> jp.getCandidateId().toString())
                     .collect(Collectors.joining(","));
-            return new UserProfile().getAllAppliedCandidate( candidateList, listOfJobApply  );
+            return new UserProfile().getAllAppliedCandidate(candidateList, listOfJobApply);
         } else {
             return ResponseEntity.noContent().build();
         }
@@ -62,20 +63,20 @@ public class JobApplyService {
 
     public List<Job> getAllAppliedJob(Long candidateId) {
 
+        return StreamSupport.stream(jobApplyRepository.getAllJob(candidateId).spliterator(), false)
+                .collect(Collectors.toList());
+        // Iterable<JobApply> appliedJobs =
+        // jobApplyRepository.findAllByCandidateId(candidateId);
 
-        return StreamSupport.stream(jobApplyRepository.getAllJob(candidateId).spliterator(), false).collect(Collectors.toList());
-        // Iterable<JobApply> appliedJobs = jobApplyRepository.findAllByCandidateId(candidateId);
-
-        
         // if (appliedJobs.spliterator().estimateSize() > 0) { // checking list size
-        //     List<Job> jobs = StreamSupport.stream(appliedJobs.spliterator() , false).map(
-        //         aj->aj.getJob()
-        //         ).collect(Collectors.toList());
-        //     return jobs;
+        // List<Job> jobs = StreamSupport.stream(appliedJobs.spliterator() , false).map(
+        // aj->aj.getJob()
+        // ).collect(Collectors.toList());
+        // return jobs;
         // } else {
-        //     return List.of();
+        // return List.of();
         // }
-       
+
     }
 
 }
